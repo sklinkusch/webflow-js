@@ -22,3 +22,4 @@
 - CSS-Anweisungen (siehe before.html) im Head einfügen
 - `<script src="https://combinatronics.com/sklinkusch/webflow-js/main/schlafduo-lp-6/index.js"></script>`
   am Ende vom Body hinzufügen
+- `<a>`-Elemente, die den Cart öffnen sollen, durch `<button>`-Elemente ersetzen
