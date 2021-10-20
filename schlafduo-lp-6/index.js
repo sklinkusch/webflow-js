@@ -20,20 +20,20 @@ Webflow.push(function () {
       name: "Schlafkerze Rosmarin",
       imageLink:
         "https://cdn.sanity.io/files/8yon6w8q/production/5a4a17512a8fa1b1244d4235330ff5ccae4a8088.png",
-      price: 19.9,
+      price: 14.9,
     },
     matte: {
       vid: "37843232653469",
       name: "Akupressurmatte",
       imageLink:
         "https://cdn.sanity.io/files/8yon6w8q/production/be9f01c288930bce4e2e628c4b595b523b8ef688.png",
-      price: 35.9,
+      price: 29.9,
     },
     maske: {
       vid: "37871892037789",
       name: "Schlafmaske",
       imageLink: "",
-      price: 15.9,
+      price: 9.9,
     },
   }
   // Rabatt
