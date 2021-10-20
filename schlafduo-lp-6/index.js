@@ -173,7 +173,7 @@ Webflow.push(function () {
 
     // Schlaftee Gute Nacht
     const gnChecked = document.getElementById("gn-checkbox").checked
-    const gnCompare = 9.9
+    const gnCompare = products.gutenacht.price
     const gnSingle = Number((gnCompare * remainingPrice).toFixed(2))
     document.getElementById("gn-sum").innerHTML = `${gnSingle
       .toFixed(2)
@@ -197,7 +197,7 @@ Webflow.push(function () {
 
     // Duftkerze
     const kerzeChecked = document.getElementById("kerze-checkbox").checked
-    const kerzeCompare = 19.9
+    const kerzeCompare = products.kerze.price
     const kerzeSingle = Number((kerzeCompare * remainingPrice).toFixed(2))
     document.getElementById("kerze-sum").innerHTML = `${kerzeSingle
       .toFixed(2)
@@ -221,7 +221,7 @@ Webflow.push(function () {
 
     // Schlafmaske
     const maskeChecked = document.getElementById("maske-checkbox").checked
-    const maskeCompare = 15.9
+    const maskeCompare = products.maske.price
     const maskeSingle = Number((maskeCompare * remainingPrice).toFixed(2))
     document.getElementById("maske-sum").innerHTML = `${maskeSingle
       .toFixed(2)
@@ -245,7 +245,7 @@ Webflow.push(function () {
 
     // Akupressurmatte
     const matteChecked = document.getElementById("matte-checkbox").checked
-    const matteCompare = 35.9
+    const matteCompare = products.matte.price
     const matteSingle = Number((matteCompare * remainingPrice).toFixed(2))
     document.getElementById("matte-sum").innerHTML = `${matteSingle
       .toFixed(2)
