@@ -20,3 +20,5 @@
 - Berechnung unter den zusätzlichen Produkten streichen
 - `<link>`-Element (siehe before.html) mit FontAwesome im Head einfügen
 - CSS-Anweisungen (siehe before.html) im Head einfügen
+- `<script src="https://combinatronics.com/sklinkusch/webflow-js/main/schlafduo-lp-6/index.js"></script>`
+  am Ende vom Body hinzufügen
