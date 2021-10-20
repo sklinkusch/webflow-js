@@ -49,11 +49,18 @@ Webflow.push(function () {
       : products.duo.price.toFixed(2)
     const schlafduoTotal = (schlafduoCompare * remainingPrice).toFixed(2)
     document.getElementById("schlafduo-qty").value = `${schlafduoQuantity}`
+    document.getElementById("schlafduo-qty-2").value = `${schlafduoQuantity}`
     document.getElementById(
       "schlafduo-sum"
     ).innerHTML = `${schlafduoTotal.replace(".", ",")} €`
     document.getElementById(
+      "schlafduo-sum-2"
+    ).innerHTML = `${schlafduoTotal.replace(".", ",")} €`
+    document.getElementById(
       "schlafduo-compare"
+    ).innerHTML = `${schlafduoCompare.replace(".", ",")} €`
+    document.getElementById(
+      "schlafduo-compare-2"
     ).innerHTML = `${schlafduoCompare.replace(".", ",")} €`
 
     // Schlaftee Gute Nacht
@@ -115,7 +122,7 @@ Webflow.push(function () {
   }
 
   // Änderung der Seite und des Warenkorbs nach Änderung von Elementen auf der Seite
-  function updateCart() {
+  function updateCart(e) {
     // Hole Warenkorb aus localStorage
     const cart = JSON.parse(localStorage.getItem("cart")) || {}
 
@@ -124,9 +131,16 @@ Webflow.push(function () {
     const schlafduoSingle = Number(
       (products.duo.price * remainingPrice).toFixed(2)
     )
-    const schlafduoQuantity = Number(
-      document.getElementById("schlafduo-qty").value
-    )
+    let schlafduoQuantity
+    if (e.target.id === "schlafduo-qty-2") {
+      schlafduoQuantity = Number(
+        document.getElementById("schlafduo-qty-2").value
+      )
+      document.getElementById("schlafduo-qty").value = `${schlafduoQuantity}`
+    } else {
+      schlafduoQuantity = Number(document.getElementById("schlafduo-qty").value)
+      document.getElementById("schlafduo-qty-2").value = `${schlafduoQuantity}`
+    }
     const schlafduoTotal = (schlafduoSingle * schlafduoQuantity).toFixed(2)
     const schlafduoTotalCompare = (
       schlafduoQuantity * schlafduoCompare
@@ -135,7 +149,13 @@ Webflow.push(function () {
       "schlafduo-sum"
     ).innerHTML = `${schlafduoTotal.replace(".", ",")} €`
     document.getElementById(
+      "schlafduo-sum-2"
+    ).innerHTML = `${schlafduoTotal.replace(".", ",")} €`
+    document.getElementById(
       "schlafduo-compare"
+    ).innerHTML = `${schlafduoTotalCompare.replace(".", ",")} €`
+    document.getElementById(
+      "schlafduo-compare-2"
     ).innerHTML = `${schlafduoTotalCompare.replace(".", ",")} €`
     const schlafduo = {
       checked: true,
@@ -252,6 +272,7 @@ Webflow.push(function () {
   // EventListener auf der Seite
   const elements = [
     "schlafduo-qty",
+    "schlafduo-qty-2",
     "gn-checkbox",
     "kerze-checkbox",
     "maske-checkbox",
@@ -430,8 +451,13 @@ Webflow.push(function () {
   })
   document.getElementById("closeBtn").addEventListener("click", closeCart)
 
-  const toCartElements = ["cart-button-1", "cart-button-2"]
+  const toCartElements = ["cart-button-1", "cart-button-2", "cart-button-3"]
   toCartElements.forEach((item) => {
-    document.getElementById(item).addEventListener("click", openCart)
+    document.getElementById(item).addEventListener("click", () => {
+      formatCart()
+      addEventListeners()
+      openCart()
+      adjustMaxHeight()
+    })
   })
 })
