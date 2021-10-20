@@ -32,7 +32,8 @@ Webflow.push(function () {
     maske: {
       vid: "37871892037789",
       name: "Schlafmaske",
-      imageLink: "",
+      imageLink:
+        "https://cdn.sanity.io/files/8yon6w8q/production/876fbcd31e21eff83a1bb10285f1a0d92e2e6b39.png",
       price: 9.9,
     },
   }
