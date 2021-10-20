@@ -288,11 +288,15 @@ Webflow.push(function () {
   function openCart() {
     const cartWrapper = document.getElementById("cart-body")
     cartWrapper.classList.remove("hidden-element")
+    const chatlio = document.getElementById("chatlio-widget")
+    chatlio.classList.add("hidden-element")
   }
   // Funktion zum Schließen des Carts
   function closeCart() {
     const cartWrapper = document.getElementById("cart-body")
     cartWrapper.classList.add("hidden-element")
+    const chatlio = document.getElementById("chatlio-widget")
+    chatlio.classList.remove("hidden-element")
   }
   // Funktion zum Neuaufbau des Cart-Elements
   function formatCart(predefinedCart) {
