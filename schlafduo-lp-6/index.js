@@ -1,5 +1,5 @@
 Webflow.push(function () {
-  // Daten
+  // Produkte auf der Seite
   const products = {
     duo: {
       vid: "40419966877853",
@@ -36,15 +36,16 @@ Webflow.push(function () {
       price: 15.9,
     },
   }
+  // Rabatt
   const discountPercent = 0.2
   const remainingPrice = 1 - discountPercent
 
-  function updatePage() {
-    const cart = JSON.parse(localStorage.getItem("cart")) || {}
-
+  // Funktion zum Aktualisieren der Elemente auf der Seite nach Änderung im Warenkorb
+  function updatePage(cart) {
+    // Schlafduo
     const schlafduoQuantity = cart.hasOwnProperty("duo") ? cart.duo.quantity : 1
     const schlafduoCompare = cart.hasOwnProperty("duo")
-      ? cart.duo.compare.toFixed(2)
+      ? (cart.duo.quantity * cart.duo.price).toFixed(2)
       : products.duo.price.toFixed(2)
     const schlafduoTotal = (schlafduoCompare * remainingPrice).toFixed(2)
     document.getElementById("schlafduo-qty").value = `${schlafduoQuantity}`
@@ -54,14 +55,75 @@ Webflow.push(function () {
     document.getElementById(
       "schlafduo-compare"
     ).innerHTML = `${schlafduoCompare.replace(".", ",")} €`
+
+    // Schlaftee Gute Nacht
+    const gutenachtChecked = cart.hasOwnProperty("gutenacht")
+    document.getElementById("gn-checkbox").checked = gutenachtChecked
+    const gutenachtCompare = products.gutenacht.price
+    Number((products.gutenacht.price * remainingPrice).toFixed(2))
+    const gutenachtTotal = Number(
+      (products.gutenacht.price * remainingPrice).toFixed(2)
+    )
+    document.getElementById("gn-sum").innerHTML = `${gutenachtTotal
+      .toFixed(2)
+      .replace(".", ",")} €`
+    document.getElementById("gn-compare").innerHTML = `${gutenachtCompare
+      .toFixed(2)
+      .replace(".", ",")} €`
+
+    // Duftkerze
+    const kerzeChecked = cart.hasOwnProperty("kerze")
+    document.getElementById("kerze-checkbox").checked = kerzeChecked
+    const kerzeCompare = products.kerze.price
+    const kerzeTotal = Number(
+      (products.kerze.price * remainingPrice).toFixed(2)
+    )
+    document.getElementById("kerze-sum").innerHTML = `${kerzeTotal
+      .toFixed(2)
+      .replace(".", ",")} €`
+    document.getElementById("kerze-compare").innerHTML = `${kerzeCompare
+      .toFixed(2)
+      .replace(".", ",")} €`
+
+    // Schlafmaske
+    const maskeChecked = cart.hasOwnProperty("maske")
+    document.getElementById("maske-checkbox").checked = maskeChecked
+    const maskeCompare = products.maske.price
+    const maskeTotal = Number(
+      (products.maske.price * remainingPrice).toFixed(2)
+    )
+    document.getElementById("maske-sum").innerHTML = `${maskeTotal
+      .toFixed(2)
+      .replace(".", ",")} €`
+    document.getElementById("maske-compare").innerHTML = `${maskeCompare
+      .toFixed(2)
+      .replace(".", ",")} €`
+
+    // Akupressurmatte
+    const matteChecked = cart.hasOwnProperty("matte")
+    document.getElementById("matte-checkbox").checked = matteChecked
+    const matteCompare = products.matte.price
+    const matteTotal = Number(
+      (products.matte.price * remainingPrice).toFixed(2)
+    )
+    document.getElementById("matte-sum").innerHTML = `${matteTotal
+      .toFixed(2)
+      .replace(".", ",")} €`
+    document.getElementById("matte-compare").innerHTML = `${matteCompare
+      .toFixed(2)
+      .replace(".", ",")} €`
   }
 
-  // function for the page
+  // Änderung der Seite und des Warenkorbs nach Änderung von Elementen auf der Seite
   function updateCart() {
-    // Menge an Schlafduos
+    // Hole Warenkorb aus localStorage
     const cart = JSON.parse(localStorage.getItem("cart")) || {}
-    const schlafduoCompare = duo.price
-    const schlafduoSingle = Number((duo.price * remainingPrice).toFixed(2))
+
+    // Schlafduo
+    const schlafduoCompare = products.duo.price
+    const schlafduoSingle = Number(
+      (products.duo.price * remainingPrice).toFixed(2)
+    )
     const schlafduoQuantity = Number(
       document.getElementById("schlafduo-qty").value
     )
@@ -85,8 +147,6 @@ Webflow.push(function () {
       cart["duo"] = {
         ...products.duo,
         quantity: schlafduoQuantity,
-        total: schlafduoTotal,
-        compare: schlafduoTotalCompare,
       }
     }
 
@@ -94,29 +154,19 @@ Webflow.push(function () {
     const gnChecked = document.getElementById("gn-checkbox").checked
     const gnCompare = 9.9
     const gnSingle = Number((gnCompare * remainingPrice).toFixed(2))
-    const gnQuantity = Number(document.getElementById("gn-qty").value)
-    const gnTotal = gnChecked ? (gnSingle * gnQuantity).toFixed(2) : "0.00"
-    const gnTotalCompare = gnChecked
-      ? (gnCompare * gnQuantity).toFixed(2)
-      : "0.00"
-    document.getElementById("gn-sum").innerHTML = gnChecked
-      ? `${gnTotal.replace(".", ",")} €`
-      : `${gnSingle.toFixed(2).replace(".", ",")} €`
-    document.getElementById("gn-compare").innerHTML = gnChecked
-      ? `${gnTotalCompare.toFixed(2).replace(".", ",")} €`
-      : `${gnCompare.toFixed(2).replace(".", ",")} €`
+    document.getElementById("gn-sum").innerHTML = `${gnSingle
+      .toFixed(2)
+      .replace(".", ",")} €`
+    document.getElementById("gn-compare").innerHTML = `${gnCompare
+      .toFixed(2)
+      .replace(".", ",")} €`
     const gn = {
       checked: gnChecked,
-      quantity: gnQuantity,
-      sum: Number(gnTotal),
-      compare: Number(gnTotalCompare),
     }
     if (gnChecked) {
       cart["gutenacht"] = {
         ...products.gutenacht,
-        quantity: gnQuantity,
-        total: gnTotal,
-        compare: gnCompare,
+        quantity: 1,
       }
     } else {
       if (cart.hasOwnProperty("gutenacht")) {
@@ -128,31 +178,19 @@ Webflow.push(function () {
     const kerzeChecked = document.getElementById("kerze-checkbox").checked
     const kerzeCompare = 19.9
     const kerzeSingle = Number((kerzeCompare * remainingPrice).toFixed(2))
-    const kerzeQuantity = Number(document.getElementById("kerze-qty").value)
-    const kerzeTotal = kerzeChecked
-      ? (kerzeSingle * kerzeQuantity).toFixed(2)
-      : "0.00"
-    const kerzeTotalCompare = kerzeChecked
-      ? (kerzeCompare * kerzeQuantity).toFixed(2)
-      : "0.00"
-    document.getElementById("kerze-sum").innerHTML = kerzeChecked
-      ? `${kerzeTotal.replace(".", ",")} €`
-      : `${kerzeSingle.toFixed(2).replace(".", ",")} €`
-    document.getElementById("kerze-compare").innerHTML = kerzeChecked
-      ? `${kerzeTotalCompare.replace(".", ",")} €`
-      : `${kerzeCompare.toFixed(2).replace(".", ",")} €`
+    document.getElementById("kerze-sum").innerHTML = `${kerzeSingle
+      .toFixed(2)
+      .replace(".", ",")} €`
+    document.getElementById("kerze-compare").innerHTML = `${kerzeCompare
+      .toFixed(2)
+      .replace(".", ",")} €`
     const kerze = {
       checked: kerzeChecked,
-      quantity: kerzeQuantity,
-      sum: Number(kerzeTotal),
-      compare: Number(kerzeTotalCompare),
     }
     if (kerzeChecked) {
       cart["kerze"] = {
         ...products.kerze,
-        quantity: kerzeQuantity,
-        total: kerzeTotal,
-        compare: kerzeTotalCompare,
+        quantity: 1,
       }
     } else {
       if (cart.hasOwnProperty("kerze")) {
@@ -164,31 +202,19 @@ Webflow.push(function () {
     const maskeChecked = document.getElementById("maske-checkbox").checked
     const maskeCompare = 15.9
     const maskeSingle = Number((maskeCompare * remainingPrice).toFixed(2))
-    const maskeQuantity = Number(document.getElementById("maske-qty").value)
-    const maskeTotal = maskeChecked
-      ? (maskeSingle * maskeQuantity).toFixed(2)
-      : "0.00"
-    const maskeTotalCompare = maskeChecked
-      ? (maskeCompare * maskeQuantity).toFixed(2)
-      : "0.00"
-    document.getElementById("maske-sum").innerHTML = maskeChecked
-      ? `${maskeTotal.replace(".", ",")} €`
-      : `${maskeSingle.toFixed(2).replace(".", ",")} €`
-    document.getElementById("maske-compare").innerHTML = maskeChecked
-      ? `${maskeTotalCompare.replace(".", ",")} €`
-      : `${maskeCompare.toFixed(2).replace(".", ",")} €`
+    document.getElementById("maske-sum").innerHTML = `${maskeSingle
+      .toFixed(2)
+      .replace(".", ",")} €`
+    document.getElementById("maske-compare").innerHTML = `${maskeCompare
+      .toFixed(2)
+      .replace(".", ",")} €`
     const maske = {
       checked: maskeChecked,
-      quantity: maskeQuantity,
-      sum: Number(maskeTotal),
-      compare: Number(maskeTotalCompare),
     }
     if (maskeChecked) {
       cart["maske"] = {
         ...products.maske,
-        quantity: maskeQuantity,
-        total: maskeTotal,
-        compare: maskeCompare,
+        quantity: 1,
       }
     } else {
       if (cart.hasOwnProperty("maske")) {
@@ -200,31 +226,19 @@ Webflow.push(function () {
     const matteChecked = document.getElementById("matte-checkbox").checked
     const matteCompare = 35.9
     const matteSingle = Number((matteCompare * remainingPrice).toFixed(2))
-    const matteQuantity = Number(document.getElementById("matte-qty").value)
-    const matteTotal = matteChecked
-      ? (matteSingle * matteQuantity).toFixed(2)
-      : "0.00"
-    const matteTotalCompare = matteChecked
-      ? (matteSingle * matteQuantity).toFixed(2)
-      : "0.00"
-    document.getElementById("matte-sum").innerHTML = matteChecked
-      ? `${matteTotal.replace(".", ",")} €`
-      : `${matteSingle.toFixed(2).replace(".", ",")} €`
-    document.getElementById("matte-compare").innerHTML = matteChecked
-      ? `${matteTotalCompare.replace(".", ",")} €`
-      : `${matteCompare.toFixed(2).replace(".", ",")} €`
+    document.getElementById("matte-sum").innerHTML = `${matteSingle
+      .toFixed(2)
+      .replace(".", ",")} €`
+    document.getElementById("matte-compare").innerHTML = `${matteCompare
+      .toFixed(2)
+      .replace(".", ",")} €`
     const matte = {
       checked: matteChecked,
-      quantity: matteQuantity,
-      sum: Number(matteTotal),
-      compare: Number(matteTotalCompare),
     }
     if (matteChecked) {
       cart["matte"] = {
         ...products.matte,
-        quantity: matteQuantity,
-        total: matteTotal,
-        compare: matteTotalCompare,
+        quantity: 1,
       }
     } else {
       if (cart.hasOwnProperty("matte")) {
@@ -232,59 +246,15 @@ Webflow.push(function () {
       }
     }
 
-    // Übersicht
-    const totalArray = [schlafduo, gn, kerze, maske, matte]
-    const sumCompare = totalArray.reduce((acc, curr) => acc + curr.compare, 0)
-    const sumTotal = totalArray.reduce((acc, curr) => acc + sum, 0)
-    const sumDiscount = sumTotal - sumCompare
-    const sumComparePrint = sumCompare.toFixed(2)
-    document.getElementById(
-      "verkaufspreis"
-    ).innerHTML = `${sumComparePrint.replace(".", ",")} €`
-
-    const discountName = ""
-    const discountPrint = sumDiscount.toFixed(2)
-    document.getElementById("rabatt").innerHTML = `${discountPrint.replace(
-      ".",
-      ","
-    )} €`
-
-    const sumTotalPrint = sumTotal.toFixed(2)
-    document.getElementById("total").innerHTML = `${sumTotalPrint.replace(
-      ".",
-      ","
-    )} €`
-
     localStorage.setItem("cart", JSON.stringify(cart))
   }
 
-  /*const checkoutLink = document.getElementById("checkout")
-  const link = totalArray.reduce((acc, curr) => {
-    if(curr.checked) {
-      if(acc.length > 0){
-        return `${acc},${curr.id}:${curr.quantity}`
-      } else {
-        return `${curr.id}:${curr.quantity}`
-      }
-    } else {
-      return acc
-    }
-  },"")
-  const url = `https://shop.sleep.ink/cart/${link}?discount=${discountName}`
-  checkoutLink.href = url
-}*/
-
+  // EventListener auf der Seite
   const elements = [
     "schlafduo-qty",
-    "relax-qty",
-    "relax-checkbox",
-    "gn-qty",
     "gn-checkbox",
-    "kerze-qty",
     "kerze-checkbox",
-    "maske-qty",
     "maske-checkbox",
-    "matte-qty",
     "matte-checkbox",
   ]
 
@@ -292,7 +262,6 @@ Webflow.push(function () {
     document.getElementById(item).addEventListener("change", updateCart)
   })
 
-  // function for the cart
   // Funktion zum Öffnen des Carts
   function openCart() {
     const cartWrapper = document.getElementById("cart-body")
@@ -356,7 +325,7 @@ Webflow.push(function () {
     )
     const formattedSubtotal = subtotal.toFixed(2).replace(".", ",")
     document.getElementById("subtotal").innerHTML = `${formattedSubtotal} €`
-    const discountPercent = 0.15 // hier noch korrekten Wert einfügen
+    const discountPercent = 0.2 // hier noch korrekten Wert einfügen
     const discount = discountPercent * subtotal
     const formattedDiscount = discount.toFixed(2).replace(".", ",")
     document.getElementById("discount").innerHTML = `– ${formattedDiscount} €`
@@ -399,15 +368,15 @@ Webflow.push(function () {
       const increaseId = `${key}Inc`
       const decreaseId = `${key}Dec`
       const removeId = `${key}Rem`
-      document
-        .getElementById(increaseId)
-        .addEventListener("click", () => addToCart(key))
-      document
-        .getElementById(decreaseId)
-        .addEventListener("click", () => decreaseItem(key))
-      document
-        .getElementById(removeId)
-        .addEventListener("click", () => removeFromCart(key))
+      document.getElementById(increaseId).addEventListener("click", () => {
+        addToCart(key)
+      })
+      document.getElementById(decreaseId).addEventListener("click", () => {
+        decreaseItem(key)
+      })
+      document.getElementById(removeId).addEventListener("click", () => {
+        removeFromCart(key)
+      })
     })
   }
   // Waren zum Cart hinzufügen, Menge erhöhen
@@ -421,6 +390,7 @@ Webflow.push(function () {
     localStorage.setItem("cart", JSON.stringify(cart))
     formatCart(cart)
     addEventListeners(cart)
+    updatePage(cart)
     openCart()
     adjustMaxHeight()
   }
@@ -432,6 +402,7 @@ Webflow.push(function () {
       localStorage.setItem("cart", JSON.stringify(cart))
       formatCart(cart)
       addEventListeners(cart)
+      updatePage(cart)
       openCart()
       adjustMaxHeight()
     } else {
@@ -445,6 +416,7 @@ Webflow.push(function () {
       localStorage.setItem("cart", JSON.stringify(cart))
       formatCart(cart)
       addEventListeners(cart)
+      updatePage(cart)
       openCart()
       adjustMaxHeight()
     }
@@ -458,7 +430,7 @@ Webflow.push(function () {
   })
   document.getElementById("closeBtn").addEventListener("click", closeCart)
 
-  const toCartElements = ["cart-button-1", "cart-button-2", "open-cart"]
+  const toCartElements = ["cart-button-1", "cart-button-2"]
   toCartElements.forEach((item) => {
     document.getElementById(item).addEventListener("click", openCart)
   })
