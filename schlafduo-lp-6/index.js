@@ -365,7 +365,7 @@ Webflow.push(function () {
     const itemString = Object.values(cart)
       .map((item) => `${item.vid}:${item.quantity}`)
       .join(",")
-    const discountCode = "GLP-47290" // hier Gutscheincode eintragen
+    const discountCode = "schlafduo-lp" // hier Gutscheincode eintragen
     const url =
       Object.values(cart).length > 0
         ? `https://shop.sleep.ink/cart/${itemString}?discount=${discountCode}`
