@@ -38,7 +38,7 @@ Webflow.push(function () {
       },
     }
     // Rabatt
-    const discountPercent = 0.2
+    const discountPercent = 0.29
     const remainingPrice = 1 - discountPercent
   
     // Funktion zum Aktualisieren der Elemente auf der Seite nach Änderung im Warenkorb
@@ -357,7 +357,7 @@ Webflow.push(function () {
       )
       const formattedSubtotal = subtotal.toFixed(2).replace(".", ",")
       document.getElementById("subtotal").innerHTML = `${formattedSubtotal} €`
-      const discountPercent = 0.2 // hier noch korrekten Wert einfügen
+      const discountPercent = 0.29 // hier noch korrekten Wert einfügen
       const discount = discountPercent * subtotal
       const formattedDiscount = discount.toFixed(2).replace(".", ",")
       document.getElementById("discount").innerHTML = `– ${formattedDiscount} €`
@@ -371,7 +371,7 @@ Webflow.push(function () {
       const itemString = Object.values(cart)
         .map((item) => `${item.vid}:${item.quantity}`)
         .join(",")
-      const discountCode = "schlafduo-lp" // hier Gutscheincode eintragen
+      const discountCode = "schlafessenz-lp" // hier Gutscheincode eintragen
       const url =
         Object.values(cart).length > 0
           ? `https://shop.sleep.ink/cart/${itemString}?discount=${discountCode}`
