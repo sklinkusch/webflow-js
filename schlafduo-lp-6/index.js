@@ -125,7 +125,9 @@ Webflow.push(function () {
   // Änderung der Seite und des Warenkorbs nach Änderung von Elementen auf der Seite
   function updateCart(e) {
     // Hole Warenkorb aus localStorage
-    const cart = JSON.parse(localStorage.getItem("cart")) || { duo: { ...products.duo, quantity: 1 } }
+    const cart = JSON.parse(localStorage.getItem("cart")) || {
+      duo: { ...products.duo, quantity: 1 },
+    }
 
     // Schlafduo
     const schlafduoCompare = products.duo.price
@@ -140,8 +142,11 @@ Webflow.push(function () {
         )
         document.getElementById("schlafduo-qty").value = `${schlafduoQuantity}`
       } else {
-        schlafduoQuantity = Number(document.getElementById("schlafduo-qty").value) || 1
-        document.getElementById("schlafduo-qty-2").value = `${schlafduoQuantity}`
+        schlafduoQuantity =
+          Number(document.getElementById("schlafduo-qty").value) || 1
+        document.getElementById(
+          "schlafduo-qty-2"
+        ).value = `${schlafduoQuantity}`
       }
     } else {
       schlafduoQuantity = 1
@@ -466,6 +471,7 @@ Webflow.push(function () {
   const toCartElements = ["cart-button-1", "cart-button-2", "cart-button-3"]
   toCartElements.forEach((item) => {
     document.getElementById(item).addEventListener("click", () => {
+      updateCart()
       formatCart()
       addEventListeners()
       openCart()
