@@ -18,7 +18,7 @@ Webflow.push(function () {
     // Hole Warenkorb aus localStorage
     const cart = JSON.parse(localStorage.getItem("cart"))
     if (cart === null) {
-      const altCart = { duo: {} }
+      const altCart = {}
       localStorage.setItem("cart", JSON.stringify(altCart))
     }
   }
@@ -185,7 +185,6 @@ Webflow.push(function () {
       localStorage.setItem("cart", JSON.stringify(cart))
       formatCart(cart)
       addEventListeners(cart)
-      updatePage(cart)
       openCart()
       adjustMaxHeight()
     }
