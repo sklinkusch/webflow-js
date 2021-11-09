@@ -1,299 +1,27 @@
 Webflow.push(function () {
   // Produkte auf der Seite
   const products = {
-    duo: {
+    essenz: {
       vid: "37535913738397",
       name: "Schlafessenz 60 Nächte",
       imageLink:
         "https://cdn.sanity.io/files/8yon6w8q/production/f06b8ecc52f770f6c663391e4062df5357229b66.png",
       price: 69.9,
     },
-    gutenacht: {
-      vid: "32130834006112",
-      name: "Gute Nacht Schlaftee",
-      imageLink:
-        "https://cdn.sanity.io/files/8yon6w8q/production/dbe98017115ae8307f6a73cfd4fc3504bbcdafd7.png",
-      price: 9.9,
-    },
-    kerze: {
-      vid: "39966612062365",
-      name: "Schlafkerze Rosmarin",
-      imageLink:
-        "https://cdn.sanity.io/files/8yon6w8q/production/5a4a17512a8fa1b1244d4235330ff5ccae4a8088.png",
-      price: 14.9,
-    },
-    matte: {
-      vid: "37843232653469",
-      name: "Akupressurmatte",
-      imageLink:
-        "https://cdn.sanity.io/files/8yon6w8q/production/be9f01c288930bce4e2e628c4b595b523b8ef688.png",
-      price: 29.9,
-    },
-    maske: {
-      vid: "37871892037789",
-      name: "Schlafmaske",
-      imageLink:
-        "https://cdn.sanity.io/files/8yon6w8q/production/876fbcd31e21eff83a1bb10285f1a0d92e2e6b39.png",
-      price: 9.9,
-    },
   }
   // Rabatt
-  const discountPercent = 0.29
+  const discountPercent = 0.5
   const remainingPrice = 1 - discountPercent
-
-  // Funktion zum Aktualisieren der Elemente auf der Seite nach Änderung im Warenkorb
-  function updatePage(cart) {
-    // Schlafduo
-    const schlafduoQuantity = cart.hasOwnProperty("duo") ? cart.duo.quantity : 1
-    const schlafduoCompare = cart.hasOwnProperty("duo")
-      ? (cart.duo.quantity * cart.duo.price).toFixed(2)
-      : products.duo.price.toFixed(2)
-    const schlafduoTotal = (schlafduoCompare * remainingPrice).toFixed(2)
-    document.getElementById("schlafduo-qty").value = `${schlafduoQuantity}`
-    document.getElementById("schlafduo-qty-2").value = `${schlafduoQuantity}`
-    document.getElementById(
-      "schlafduo-sum"
-    ).innerHTML = `${schlafduoTotal.replace(".", ",")} €`
-    document.getElementById(
-      "schlafduo-sum-2"
-    ).innerHTML = `${schlafduoTotal.replace(".", ",")} €`
-    document.getElementById(
-      "schlafduo-compare"
-    ).innerHTML = `${schlafduoCompare.replace(".", ",")} €`
-    document.getElementById(
-      "schlafduo-compare-2"
-    ).innerHTML = `${schlafduoCompare.replace(".", ",")} €`
-
-    // Schlaftee Gute Nacht
-    const gutenachtChecked = cart.hasOwnProperty("gutenacht")
-    document.getElementById("gn-checkbox").checked = gutenachtChecked
-    const gutenachtCompare = products.gutenacht.price
-    Number((products.gutenacht.price * remainingPrice).toFixed(2))
-    const gutenachtTotal = Number(
-      (products.gutenacht.price * remainingPrice).toFixed(2)
-    )
-    document.getElementById("gn-sum").innerHTML = `${gutenachtTotal
-      .toFixed(2)
-      .replace(".", ",")} €`
-    document.getElementById("gn-compare").innerHTML = `${gutenachtCompare
-      .toFixed(2)
-      .replace(".", ",")} €`
-
-    // Duftkerze
-    const kerzeChecked = cart.hasOwnProperty("kerze")
-    document.getElementById("kerze-checkbox").checked = kerzeChecked
-    const kerzeCompare = products.kerze.price
-    const kerzeTotal = Number(
-      (products.kerze.price * remainingPrice).toFixed(2)
-    )
-    document.getElementById("kerze-sum").innerHTML = `${kerzeTotal
-      .toFixed(2)
-      .replace(".", ",")} €`
-    document.getElementById("kerze-compare").innerHTML = `${kerzeCompare
-      .toFixed(2)
-      .replace(".", ",")} €`
-
-    // Schlafmaske
-    const maskeChecked = cart.hasOwnProperty("maske")
-    document.getElementById("maske-checkbox").checked = maskeChecked
-    const maskeCompare = products.maske.price
-    const maskeTotal = Number(
-      (products.maske.price * remainingPrice).toFixed(2)
-    )
-    document.getElementById("maske-sum").innerHTML = `${maskeTotal
-      .toFixed(2)
-      .replace(".", ",")} €`
-    document.getElementById("maske-compare").innerHTML = `${maskeCompare
-      .toFixed(2)
-      .replace(".", ",")} €`
-
-    // Akupressurmatte
-    const matteChecked = cart.hasOwnProperty("matte")
-    document.getElementById("matte-checkbox").checked = matteChecked
-    const matteCompare = products.matte.price
-    const matteTotal = Number(
-      (products.matte.price * remainingPrice).toFixed(2)
-    )
-    document.getElementById("matte-sum").innerHTML = `${matteTotal
-      .toFixed(2)
-      .replace(".", ",")} €`
-    document.getElementById("matte-compare").innerHTML = `${matteCompare
-      .toFixed(2)
-      .replace(".", ",")} €`
-  }
 
   // Änderung der Seite und des Warenkorbs nach Änderung von Elementen auf der Seite
   function updateCart(e) {
     // Hole Warenkorb aus localStorage
-    const cart = JSON.parse(localStorage.getItem("cart")) || {
-      duo: { ...products.duo, quantity: 1 },
+    const cart = JSON.parse(localStorage.getItem("cart"))
+    if (cart === null) {
+      const altCart = {}
+      localStorage.setItem("cart", JSON.stringify(altCart))
     }
-
-    // Schlafduo
-    const schlafduoCompare = products.duo.price
-    const schlafduoSingle = Number(
-      (products.duo.price * remainingPrice).toFixed(2)
-    )
-    let schlafduoQuantity
-    if (e) {
-      if (e.target.id === "schlafduo-qty-2") {
-        schlafduoQuantity = Number(
-          document.getElementById("schlafduo-qty-2").value
-        )
-        document.getElementById("schlafduo-qty").value = `${schlafduoQuantity}`
-      } else {
-        schlafduoQuantity =
-          Number(document.getElementById("schlafduo-qty").value) || 1
-        document.getElementById(
-          "schlafduo-qty-2"
-        ).value = `${schlafduoQuantity}`
-      }
-    } else {
-      schlafduoQuantity = 1
-      document.getElementById("schlafduo-qty").value = `${schlafduoQuantity}`
-      document.getElementById("schlafduo-qty-2").value = `${schlafduoQuantity}`
-    }
-    const schlafduoTotal = (schlafduoSingle * schlafduoQuantity).toFixed(2)
-    const schlafduoTotalCompare = (
-      schlafduoQuantity * schlafduoCompare
-    ).toFixed(2)
-    document.getElementById(
-      "schlafduo-sum"
-    ).innerHTML = `${schlafduoTotal.replace(".", ",")} €`
-    document.getElementById(
-      "schlafduo-sum-2"
-    ).innerHTML = `${schlafduoTotal.replace(".", ",")} €`
-    document.getElementById(
-      "schlafduo-compare"
-    ).innerHTML = `${schlafduoTotalCompare.replace(".", ",")} €`
-    document.getElementById(
-      "schlafduo-compare-2"
-    ).innerHTML = `${schlafduoTotalCompare.replace(".", ",")} €`
-    const schlafduo = {
-      checked: true,
-      quantity: schlafduoQuantity,
-      sum: Number(schlafduoTotal),
-      compare: Number(schlafduoTotalCompare),
-    }
-    if (schlafduoQuantity > 0) {
-      cart["duo"] = {
-        ...products.duo,
-        quantity: schlafduoQuantity,
-      }
-    }
-
-    // Schlaftee Gute Nacht
-    const gnChecked = document.getElementById("gn-checkbox").checked
-    const gnCompare = products.gutenacht.price
-    const gnSingle = Number((gnCompare * remainingPrice).toFixed(2))
-    document.getElementById("gn-sum").innerHTML = `${gnSingle
-      .toFixed(2)
-      .replace(".", ",")} €`
-    document.getElementById("gn-compare").innerHTML = `${gnCompare
-      .toFixed(2)
-      .replace(".", ",")} €`
-    const gn = {
-      checked: gnChecked,
-    }
-    if (gnChecked) {
-      cart["gutenacht"] = {
-        ...products.gutenacht,
-        quantity: 1,
-      }
-    } else {
-      if (cart.hasOwnProperty("gutenacht")) {
-        delete cart["gutenacht"]
-      }
-    }
-
-    // Duftkerze
-    const kerzeChecked = document.getElementById("kerze-checkbox").checked
-    const kerzeCompare = products.kerze.price
-    const kerzeSingle = Number((kerzeCompare * remainingPrice).toFixed(2))
-    document.getElementById("kerze-sum").innerHTML = `${kerzeSingle
-      .toFixed(2)
-      .replace(".", ",")} €`
-    document.getElementById("kerze-compare").innerHTML = `${kerzeCompare
-      .toFixed(2)
-      .replace(".", ",")} €`
-    const kerze = {
-      checked: kerzeChecked,
-    }
-    if (kerzeChecked) {
-      cart["kerze"] = {
-        ...products.kerze,
-        quantity: 1,
-      }
-    } else {
-      if (cart.hasOwnProperty("kerze")) {
-        delete cart["kerze"]
-      }
-    }
-
-    // Schlafmaske
-    const maskeChecked = document.getElementById("maske-checkbox").checked
-    const maskeCompare = products.maske.price
-    const maskeSingle = Number((maskeCompare * remainingPrice).toFixed(2))
-    document.getElementById("maske-sum").innerHTML = `${maskeSingle
-      .toFixed(2)
-      .replace(".", ",")} €`
-    document.getElementById("maske-compare").innerHTML = `${maskeCompare
-      .toFixed(2)
-      .replace(".", ",")} €`
-    const maske = {
-      checked: maskeChecked,
-    }
-    if (maskeChecked) {
-      cart["maske"] = {
-        ...products.maske,
-        quantity: 1,
-      }
-    } else {
-      if (cart.hasOwnProperty("maske")) {
-        delete cart["maske"]
-      }
-    }
-
-    // Akupressurmatte
-    const matteChecked = document.getElementById("matte-checkbox").checked
-    const matteCompare = products.matte.price
-    const matteSingle = Number((matteCompare * remainingPrice).toFixed(2))
-    document.getElementById("matte-sum").innerHTML = `${matteSingle
-      .toFixed(2)
-      .replace(".", ",")} €`
-    document.getElementById("matte-compare").innerHTML = `${matteCompare
-      .toFixed(2)
-      .replace(".", ",")} €`
-    const matte = {
-      checked: matteChecked,
-    }
-    if (matteChecked) {
-      cart["matte"] = {
-        ...products.matte,
-        quantity: 1,
-      }
-    } else {
-      if (cart.hasOwnProperty("matte")) {
-        delete cart["matte"]
-      }
-    }
-
-    localStorage.setItem("cart", JSON.stringify(cart))
   }
-
-  // EventListener auf der Seite
-  const elements = [
-    "schlafduo-qty",
-    "schlafduo-qty-2",
-    "gn-checkbox",
-    "kerze-checkbox",
-    "maske-checkbox",
-    "matte-checkbox",
-  ]
-
-  elements.forEach((item) => {
-    document.getElementById(item).addEventListener("change", updateCart)
-  })
 
   // Funktion zum Öffnen des Carts
   function openCart() {
@@ -362,7 +90,7 @@ Webflow.push(function () {
     )
     const formattedSubtotal = subtotal.toFixed(2).replace(".", ",")
     document.getElementById("subtotal").innerHTML = `${formattedSubtotal} €`
-    const discountPercent = 0.29 // hier noch korrekten Wert einfügen
+    const discountPercent = 0.5 // hier noch korrekten Wert einfügen
     const discount = discountPercent * subtotal
     const formattedDiscount = discount.toFixed(2).replace(".", ",")
     document.getElementById("discount").innerHTML = `– ${formattedDiscount} €`
@@ -376,7 +104,7 @@ Webflow.push(function () {
     const itemString = Object.values(cart)
       .map((item) => `${item.vid}:${item.quantity}`)
       .join(",")
-    const discountCode = "schlafessenz-lp" // hier Gutscheincode eintragen
+    const discountCode = "lp-essenz50" // hier Gutscheincode eintragen
     const url =
       Object.values(cart).length > 0
         ? `https://shop.sleep.ink/cart/${itemString}?discount=${discountCode}`
@@ -416,6 +144,13 @@ Webflow.push(function () {
       })
     })
   }
+
+  const addToCartButtons = ["cart-button-1", "cart-button-2", "cart-button-4"]
+  addToCartButtons.forEach((atc) => {
+    document.getElementById(atc).addEventListener("click", () => {
+      addToCart("essenz")
+    })
+  })
   // Waren zum Cart hinzufügen, Menge erhöhen
   function addToCart(element) {
     const cart = JSON.parse(localStorage.getItem("cart")) || {}
@@ -427,7 +162,6 @@ Webflow.push(function () {
     localStorage.setItem("cart", JSON.stringify(cart))
     formatCart(cart)
     addEventListeners(cart)
-    updatePage(cart)
     openCart()
     adjustMaxHeight()
   }
@@ -439,7 +173,6 @@ Webflow.push(function () {
       localStorage.setItem("cart", JSON.stringify(cart))
       formatCart(cart)
       addEventListeners(cart)
-      updatePage(cart)
       openCart()
       adjustMaxHeight()
     } else {
@@ -453,7 +186,6 @@ Webflow.push(function () {
       localStorage.setItem("cart", JSON.stringify(cart))
       formatCart(cart)
       addEventListeners(cart)
-      updatePage(cart)
       openCart()
       adjustMaxHeight()
     }
@@ -468,7 +200,7 @@ Webflow.push(function () {
   })
   document.getElementById("closeBtn").addEventListener("click", closeCart)
 
-  const toCartElements = ["cart-button-1", "cart-button-2", "cart-button-3"]
+  const toCartElements = ["cart-button-1", "cart-button-2", "cart-button-4"]
   toCartElements.forEach((item) => {
     document.getElementById(item).addEventListener("click", () => {
       updateCart()
