@@ -6,7 +6,7 @@ Webflow.push(function () {
       name: "Schlafdrink 2x7 Portionsfläschchen",
       imageLink:
         "https://cdn.sanity.io/files/8yon6w8q/production/e6f18429485a255b0da1fd0c5d22910ef8dc856d.jpg",
-      price: 37.9,
+      price: 39.8,
     },
   }
   // Rabatt
