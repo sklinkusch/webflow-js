@@ -2,10 +2,10 @@ Webflow.push(function () {
   // Produkte auf der Seite
   const products = {
     drink: {
-      vid: "30980542857312",
-      name: "Schlafdrink 14 Nächte",
+      vid: "30980542890080",
+      name: "Schlafdrink 2x7 Portionsfläschchen",
       imageLink:
-        "https://cdn.sanity.io/files/8yon6w8q/production/0d6f249eac7a81c8a47f46dff29a2d523a333c8d.png",
+        "https://cdn.sanity.io/files/8yon6w8q/production/e6f18429485a255b0da1fd0c5d22910ef8dc856d.jpg",
       price: 37.9,
     },
   }
@@ -102,7 +102,7 @@ Webflow.push(function () {
     const formattedTotal = total.toFixed(2).replace(".", ",")
     document.getElementById("total").innerHTML = `${formattedTotal} €`
     const itemString = Object.values(cart)
-      .map((item) => `${item.vid}:${item.quantity}`)
+      .map((item) => `${item.vid}:${2 * item.quantity}`)
       .join(",")
     const discountCode = "lp-drink50" // hier Gutscheincode eintragen
     const url =
