@@ -1,12 +1,12 @@
 Webflow.push(function () {
   // Produkte auf der Seite
   const products = {
-    essenz: {
-      vid: "37535913738397",
-      name: "Schlafessenz 60 Nächte",
+    drink: {
+      vid: "30980542857312",
+      name: "Schlafdrink 14 Nächte",
       imageLink:
-        "https://cdn.sanity.io/files/8yon6w8q/production/f06b8ecc52f770f6c663391e4062df5357229b66.png",
-      price: 69.9,
+        "https://cdn.sanity.io/files/8yon6w8q/production/0d6f249eac7a81c8a47f46dff29a2d523a333c8d.png",
+      price: 37.9,
     },
   }
   // Rabatt
@@ -104,7 +104,7 @@ Webflow.push(function () {
     const itemString = Object.values(cart)
       .map((item) => `${item.vid}:${item.quantity}`)
       .join(",")
-    const discountCode = "lp-essenz50" // hier Gutscheincode eintragen
+    const discountCode = "lp-drink50" // hier Gutscheincode eintragen
     const url =
       Object.values(cart).length > 0
         ? `https://shop.sleep.ink/cart/${itemString}?discount=${discountCode}`
@@ -148,7 +148,7 @@ Webflow.push(function () {
   const addToCartButtons = ["cart-button-1", "cart-button-2", "cart-button-4"]
   addToCartButtons.forEach((atc) => {
     document.getElementById(atc).addEventListener("click", () => {
-      addToCart("essenz")
+      addToCart("drink")
     })
   })
   // Waren zum Cart hinzufügen, Menge erhöhen
