@@ -80,7 +80,8 @@ Webflow.push(function () {
     gums: {
       vid: "42035992527072",
       name: "Schlafgums",
-      imageLink: "",
+      imageLink:
+        "https://cdn.sanity.io/files/8yon6w8q/production/446fb3bc69eea2ff0d00373cb8ad17a074c3ad4d.png",
       price: 24.9,
     },
   }
