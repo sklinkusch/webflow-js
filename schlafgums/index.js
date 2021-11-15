@@ -10,7 +10,7 @@ Webflow.push(function () {
     },
   }
   // Rabatt
-  const discountPercent = 0.2
+  const discountPercent = 0.1
   const remainingPrice = 1 - discountPercent
 
   // Änderung der Seite und des Warenkorbs nach Änderung von Elementen auf der Seite
