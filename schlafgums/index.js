@@ -90,7 +90,7 @@ Webflow.push(function () {
     )
     const formattedSubtotal = subtotal.toFixed(2).replace(".", ",")
     document.getElementById("subtotal").innerHTML = `${formattedSubtotal} €`
-    const discountPercent = 0.2 // hier noch korrekten Wert einfügen
+    const discountPercent = 0.1 // hier noch korrekten Wert einfügen
     const discount = discountPercent * subtotal
     const formattedDiscount = discount.toFixed(2).replace(".", ",")
     document.getElementById("discount").innerHTML = `– ${formattedDiscount} €`
