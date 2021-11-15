@@ -144,7 +144,7 @@ Webflow.push(function () {
       })
     })
   }
-  const addToCartButtons = ["cart-button-1", "cart-button-2", "cart-button-3" ]
+  const addToCartButtons = ["cart-button-1", "cart-button-2", "cart-button-4" ]
   addToCartButtons.forEach((atc) => {
     document.getElementById(atc).addEventListener("click", () => {
       addToCart("gums")
@@ -199,7 +199,7 @@ Webflow.push(function () {
   })
   document.getElementById("closeBtn").addEventListener("click", closeCart)
 
-  const toCartElements = ["cart-button-1", "cart-button-2", "cart-button-3"]
+  const toCartElements = ["cart-button-1", "cart-button-2", "cart-button-4"]
   toCartElements.forEach((item) => {
     document.getElementById(item).addEventListener("click", () => {
       updateCart()
