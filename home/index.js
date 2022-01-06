@@ -21,13 +21,13 @@ Webflow.push(function () {
         "https://cdn.sanity.io/files/8yon6w8q/production/289c015a10afc2d4ad78ba0118ec9f9c4312719a.png",
       price: 75.8,
     },
-    duo: {
+    /*  duo: {
       vid: "40419966877853",
       name: "Schlafduo 40 Nächte",
       imageLink:
         "https://cdn.sanity.io/files/8yon6w8q/production/9830ee7b578f377d9d5ca276b27d603d3e312ea2.png",
       price: 49.9,
-    },
+    }, */
     essenz: {
       vid: "37535913738397",
       name: "Schlafessenz 60 Nächte",
@@ -246,7 +246,7 @@ Webflow.push(function () {
     drink7Btn: "drink7",
     drink14Btn: "drink14",
     drink28Btn: "drink28",
-    duoBtn: "duo",
+    //duoBtn: "duo",
     essenzBtn: "essenz",
     gutenachtBtn: "gutenacht",
     kerzeBtn: "kerze",
