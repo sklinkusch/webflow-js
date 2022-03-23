@@ -487,7 +487,10 @@ Webflow.push(function () {
   toCartElements.forEach((item) => {
     document.getElementById(item).addEventListener("click", () => {
       const oldCart = JSON.parse(localStorage.getItem("cart")) || {}
-      if (oldCart.hasOwnProperty("duo") === false) {
+      if (
+        Object.keys(oldCart) === 0 ||
+        Object.keys(oldCart).includes("duo") == false
+      ) {
         updateCart()
       }
       formatCart()
