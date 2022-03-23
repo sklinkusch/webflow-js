@@ -139,14 +139,26 @@ Webflow.push(function () {
     )
     let schlafduoQuantity
     if (e) {
-      if (e.target.id === "schlafduo-qty-2") {
+      if (
+        e.target.id === "schlafduo-qty-2" ||
+        e.target.id === "cart-button-2"
+      ) {
         schlafduoQuantity = Number(
           document.getElementById("schlafduo-qty-2").value
         )
         document.getElementById("schlafduo-qty").value = `${schlafduoQuantity}`
-      } else {
+      } else if (
+        e.target.id === "schlafduo-qty" ||
+        e.target.id === "cart-button-1"
+      ) {
         schlafduoQuantity =
           Number(document.getElementById("schlafduo-qty").value) || 1
+        document.getElementById(
+          "schlafduo-qty-2"
+        ).value = `${schlafduoQuantity}`
+      } else {
+        schlafduoQuantity = 1
+        document.getElementById("schlafduo-qty").value = `${schlafduoQuantity}`
         document.getElementById(
           "schlafduo-qty-2"
         ).value = `${schlafduoQuantity}`
