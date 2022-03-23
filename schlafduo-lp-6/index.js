@@ -472,6 +472,7 @@ Webflow.push(function () {
   const toCartElements = ["cart-button-1", "cart-button-2", "cart-button-3"]
   toCartElements.forEach((item) => {
     document.getElementById(item).addEventListener("click", () => {
+      updateCart()
       formatCart()
       addEventListeners()
       openCart()
