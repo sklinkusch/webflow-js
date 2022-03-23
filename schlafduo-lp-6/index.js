@@ -488,7 +488,7 @@ Webflow.push(function () {
     document.getElementById(item).addEventListener("click", () => {
       const oldCart = JSON.parse(localStorage.getItem("cart")) || {}
       if (
-        Object.keys(oldCart) === 0 ||
+        Object.keys(oldCart).length === 0 ||
         Object.keys(oldCart).includes("duo") == false
       ) {
         updateCart()
