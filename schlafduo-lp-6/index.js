@@ -1,4 +1,5 @@
 Webflow.push(function () {
+  const tracking = "_ga=2.102502209.1581211272.1638255294-307971057.1622539348"
   // Produkte auf der Seite
   const products = {
     duo: {
@@ -379,7 +380,7 @@ Webflow.push(function () {
     const discountCode = "schlafduo-lp" // hier Gutscheincode eintragen
     const url =
       Object.values(cart).length > 0
-        ? `https://shop.sleep.ink/cart/${itemString}?discount=${discountCode}`
+        ? `https://shop.sleep.ink/cart/${itemString}?discount=${discountCode}&${tracking}`
         : ""
     if (url.length > 0) {
       document.getElementById("checkoutBtn").href = url
