@@ -130,9 +130,7 @@ Webflow.push(function () {
     const cart =
       Object.keys(precart).length > 0 && Object.keys(precart).includes("duo")
         ? precart
-        : {
-            duo: { ...products.duo, quantity: 1 },
-          }
+        : { ...precart, duo: { ...products.duo, quantity: 1 } }
 
     // Schlafduo
     const schlafduoCompare = products.duo.price
