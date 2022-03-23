@@ -126,9 +126,13 @@ Webflow.push(function () {
   // Änderung der Seite und des Warenkorbs nach Änderung von Elementen auf der Seite
   function updateCart(e) {
     // Hole Warenkorb aus localStorage
-    const cart = JSON.parse(localStorage.getItem("cart")) || {
-      duo: { ...products.duo, quantity: 1 },
-    }
+    const precart = JSON.parse(localStorage.getItem("cart")) || {}
+    const cart =
+      Object.keys(precart).length > 0 && Object.keys(precart).includes("duo")
+        ? precart
+        : {
+            duo: { ...products.duo, quantity: 1 },
+          }
 
     // Schlafduo
     const schlafduoCompare = products.duo.price
