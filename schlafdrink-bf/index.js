@@ -2,7 +2,7 @@ Webflow.push(function () {
   // Produkte auf der Seite
   const products = {
     drink: {
-      vid: "30980542890080",
+      vid: "42719010193632",
       name: "Schlafdrink 2x7 Portionsfläschchen",
       imageLink:
         "https://cdn.sanity.io/files/8yon6w8q/production/e6f18429485a255b0da1fd0c5d22910ef8dc856d.jpg",

@@ -1,7 +1,7 @@
 Webflow.push(function () {
   const products = {
     drink7: {
-      vid: "30980542890080",
+      vid: "42719010193632",
       name: "Schlafdrink 7 Nächte",
       imageLink:
         "https://cdn.sanity.io/files/8yon6w8q/production/bc1b91227aef73f6ee7ae04e6f12a718e8744726.png",
