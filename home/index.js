@@ -14,13 +14,6 @@ Webflow.push(function () {
         "https://cdn.sanity.io/files/8yon6w8q/production/0d6f249eac7a81c8a47f46dff29a2d523a333c8d.png",
       price: 37.9,
     },
-    drink28: {
-      vid: "30980542922848",
-      name: "Schlafdrink 28 Nächte",
-      imageLink:
-        "https://cdn.sanity.io/files/8yon6w8q/production/289c015a10afc2d4ad78ba0118ec9f9c4312719a.png",
-      price: 75.8,
-    },
     duo: {
       vid: "40419966877853",
       name: "Schlafduo 40 Nächte",
@@ -245,7 +238,6 @@ Webflow.push(function () {
   const elementsATC = {
     drink7Btn: "drink7",
     drink14Btn: "drink14",
-    drink28Btn: "drink28",
     duoBtn: "duo",
     essenzBtn: "essenz",
     gutenachtBtn: "gutenacht",
